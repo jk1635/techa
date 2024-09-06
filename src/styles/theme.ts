@@ -4,9 +4,13 @@ const theme = {
       fontSize: '3.75rem',
       fontWeight: 800,
       lineHeight: '1.07',
-      fontFamily: 'Montserrat',
     },
-    headingMedium: {
+    heading1Bold: {
+      fontSize: '2rem',
+      fontWeight: 700,
+      lineHeight: '1.25',
+    },
+    heading2Bold: {
       fontSize: '1.125rem',
       fontWeight: 700,
       lineHeight: '1.56',
