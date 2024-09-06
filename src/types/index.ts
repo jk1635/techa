@@ -23,6 +23,6 @@ export interface Techa {
 }
 
 export interface Attribute {
-  trait_type: string;
+  trait_type: FilterKeys;
   value: string;
 }

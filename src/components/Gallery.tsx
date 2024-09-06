@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil';
 import Dialog from '@components/Dialog.tsx';
 import { filterState, searchState } from '@stores/atoms.ts';
 
-import { Attribute, Techa } from '@/types';
+import { Techa } from '@/types';
 import Search from '@assets/icons/search.svg';
 import theme from '@styles/theme';
 
@@ -24,21 +24,20 @@ const Gallery = ({ data }) => {
     setSearchId(formattedValue);
   };
 
-  const filteredData: Techa[] = data.filter(item => {
-    if (!item.name.includes(searchId)) return false;
-
-    const isAttributeMatch = Object.entries(filters).every(([key, selectedValues]) => {
+  const filterAttributes = (item: Techa) => {
+    return Object.entries(filters).every(([key, selectedValues]) => {
       if (selectedValues.length === 0) {
         return true;
       } else {
-        const attribute: Attribute = item.attributes.find(
-          attr => attr.trait_type === key && selectedValues.includes(attr.value)
-        );
+        const attribute = item.attributes.find(attr => attr.trait_type === key && selectedValues.includes(attr.value));
         return !!attribute;
       }
     });
+  };
 
-    return isAttributeMatch;
+  const filteredData: Techa[] = data.filter(item => {
+    if (!item.name.includes(searchId)) return false;
+    return filterAttributes(item);
   });
 
   const handleImageClick = item => {
@@ -99,7 +98,7 @@ const LazyLoadImage = ({ item, onClick }) => {
 const Skeleton = styled.div`
   width: 100%;
   background-color: rgba(142, 138, 152, 0.3);
-  border-radius: 8px;
+  border-radius: 0.75rem;
 `;
 
 const GalleryContainer = styled.section`
@@ -155,7 +154,7 @@ const Card = styled.li`
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
-  border-radius: 8px;
+  border-radius: 0.75rem;
   background-color: rgba(142, 138, 152, 0.15);
   cursor: pointer;
   opacity: ${({ inView }) => (inView ? 1 : 0)};
