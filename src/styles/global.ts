@@ -32,25 +32,21 @@ const global = css`
     font-style: normal;
   }
 
-  :root {
-    --min-width: 960px;
-    --max-width: 1216px;
-    --colors-primary: #47516b;
-  }
-
   * {
     box-sizing: border-box;
   }
 
   html {
     -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
   }
 
   body {
     font-family: 'Montserrat', 'NotoSansKR', sans-serif;
-    overflow-x: hidden;
+    overflow: hidden;
     font-size: 1rem;
     letter-spacing: -0.4px;
+    line-height: 1;
     background-color: rgb(24, 13, 54);
     color: #ffffff;
   }
@@ -72,6 +68,10 @@ const global = css`
 
   input {
     outline: none;
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
   }
 `;
 

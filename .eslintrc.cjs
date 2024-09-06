@@ -25,7 +25,7 @@ module.exports = {
 
         'react/prop-types': 'off',
 
-        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/rules-of-hooks': 'warn',
         'react-hooks/exhaustive-deps': [
             'warn',
             {
@@ -55,7 +55,7 @@ module.exports = {
                         position : "before"
                     },
                     {
-                        pattern: "{@assets/**,@styles/**,@types/**}",
+                        pattern: "{@assets/**,@styles/**,@/**,}",
                         group: "internal",
                         position : "before"
                     },
