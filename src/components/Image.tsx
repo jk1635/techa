@@ -59,4 +59,5 @@ const CardTitle = styled.span`
   ${theme.fonts.heading2Bold};
   color: #ffffff;
 `;
+
 export default LazyLoadImage;
