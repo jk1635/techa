@@ -8,11 +8,9 @@ import Sidebar from '@components/Sidebar.tsx';
 const Home = () => {
   const { data, isLoading } = useFetchData();
 
-  if (isLoading) {
-    return <Loading />;
-  }
+  if (isLoading) return <Loading />;
 
-  if (!data) return null;
+  if (!data) return <span>데이터를 불러올 수 없습니다.</span>;
 
   return (
     <Container>

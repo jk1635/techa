@@ -17,7 +17,7 @@ const LazyLoadImage = React.memo(({ item, onClick }) => {
   return (
     <Card ref={ref} onClick={onClick} inView={inView} loaded={loaded}>
       {loaded && <Skeleton />}
-      {inView && <Image src={item.image} alt={item.name} onLoad={() => setLoaded(true)} />}
+      {inView && <Image src={item.image} alt={`image-${item.name}`} onLoad={() => setLoaded(true)} />}
       <CardTitle>{item.name}</CardTitle>
     </Card>
   );

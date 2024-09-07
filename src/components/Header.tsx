@@ -3,7 +3,11 @@ import styled from '@emotion/styled';
 import theme from '@styles/theme';
 
 const Header = () => {
-  return <HeaderContainer>TECHA MIYA</HeaderContainer>;
+  return (
+    <HeaderContainer>
+      <h1>TECHA MIYA</h1>
+    </HeaderContainer>
+  );
 };
 
 const HeaderContainer = styled.header`

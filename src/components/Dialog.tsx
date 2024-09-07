@@ -1,3 +1,5 @@
+import { MouseEvent } from 'react';
+
 import styled from '@emotion/styled';
 
 import Close from '@assets/icons/close.svg';
@@ -13,7 +15,7 @@ interface DialogProps {
 const Dialog = ({ name, image, isOpen, isClose }: DialogProps) => {
   if (!isOpen || !image) return null;
 
-  const handleBackgroundClick = (e: React.MouseEvent) => {
+  const handleBackgroundClick = (e: MouseEvent) => {
     if (e.target === e.currentTarget) isClose();
   };
 
@@ -21,12 +23,12 @@ const Dialog = ({ name, image, isOpen, isClose }: DialogProps) => {
     <BackgroundContainer onClick={handleBackgroundClick}>
       <DialogWrapper>
         <ImageWrapper>
-          <Image src={image} alt="Selected" />
+          <Image src={image} alt="selected-image" />
         </ImageWrapper>
         <InfoWrapper>
           <Name>{name}</Name>
         </InfoWrapper>
-        <CloseIcon src={Close} onClick={isClose} />
+        <CloseIcon src={Close} onClick={isClose} alt="close" />
       </DialogWrapper>
     </BackgroundContainer>
   );
