@@ -33,7 +33,6 @@ const Sidebar = () => {
 
   const handleClear = () => {
     setAnimate(true);
-
     setFilters(initialFilterState);
     setIsOpen({});
     setSearchId('');
@@ -52,14 +51,14 @@ const Sidebar = () => {
     <Navbar>
       <FilterWrapper>
         <Title>Filter</Title>
-        <RefreshIcon onClick={handleClear} src={Refresh} animate={animate} />
+        <RefreshIcon onClick={handleClear} src={Refresh} animate={animate} alt="refresh" />
       </FilterWrapper>
 
       {Object.entries(Options).map(([traitType, values]) => (
         <div key={traitType}>
           <TraitTypeHeader onClick={() => toggleDropdown(traitType)}>
             <h3>{traitType}</h3>
-            <DropdownIcon src={isOpen[traitType] ? ArrowUp : ArrowDown} />
+            <DropdownIcon src={isOpen[traitType] ? ArrowUp : ArrowDown} alt="dropdown" />
           </TraitTypeHeader>
           {isOpen[traitType] && (
             <>
@@ -71,7 +70,7 @@ const Sidebar = () => {
                       checked={filters[traitType].includes(value)}
                       onChange={e => handleFilterChange(traitType, value, e)}
                     />
-                    <SelectLabel>{value}</SelectLabel>
+                    <Label>{value}</Label>
                   </SelectBox>
                 );
               })}
@@ -98,6 +97,15 @@ const FilterWrapper = styled.div`
 
 const Title = styled.h2`
   ${theme.fonts.heading2Bold}
+`;
+
+const rotateRight = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 `;
 
 const RefreshIcon = styled.img<{ animate: boolean }>`
@@ -145,17 +153,8 @@ const Checkbox = styled.input`
   cursor: pointer;
 `;
 
-const SelectLabel = styled.span`
+const Label = styled.span`
   margin-left: 1rem;
-`;
-
-const rotateRight = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 `;
 
 export default Sidebar;
