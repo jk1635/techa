@@ -2,7 +2,7 @@ import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
 import * as React from 'react';
 
 import styled from '@emotion/styled';
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 
 import Dialog from '@components/Dialog.tsx';
 import LazyLoadImage from '@components/Image.tsx';
@@ -13,8 +13,8 @@ import Search from '@assets/icons/search.svg';
 import theme from '@styles/theme';
 
 const Gallery = ({ data }) => {
-  const [searchId, setSearchId] = useRecoilState(searchState);
-  const [filters] = useRecoilState(filterState);
+  const [searchId, setSearchId] = useAtom(searchState);
+  const [filters] = useAtom(filterState);
 
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [selectedItem, setSelectedItem] = useState<{ name: string; image: string }>({ name: '', image: '' });
