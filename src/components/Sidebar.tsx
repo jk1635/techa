@@ -2,7 +2,7 @@ import { ChangeEvent, useState } from 'react';
 
 import { css, keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
-import { useRecoilState } from 'recoil';
+import { useAtom } from 'jotai';
 
 import { filterState, initialFilterState, searchState } from '@stores/atoms';
 
@@ -13,8 +13,9 @@ import Refresh from '@assets/icons/refresh.svg';
 import theme from '@styles/theme.ts';
 
 const Sidebar = () => {
-  const [filters, setFilters] = useRecoilState(filterState);
-  const [, setSearchId] = useRecoilState(searchState);
+  const [filters, setFilters] = useAtom(filterState);
+  const [, setSearchId] = useAtom(searchState);
+
   const [isOpen, setIsOpen] = useState<Record<string, boolean>>({});
   const [animate, setAnimate] = useState<boolean>(false);
 

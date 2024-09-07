@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom } from 'jotai';
 
 import { FilterState } from '@/types';
 
@@ -18,12 +18,6 @@ export const initialFilterState: FilterState = {
   Head: [],
 };
 
-export const filterState = atom<FilterState>({
-  key: 'filterState',
-  default: initialFilterState,
-});
+export const filterState = atom<FilterState>(initialFilterState);
 
-export const searchState = atom<string>({
-  key: 'searchState',
-  default: '',
-});
+export const searchState = atom<string>('');

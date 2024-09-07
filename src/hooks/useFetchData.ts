@@ -8,6 +8,7 @@ const useFetchData = () => {
     queryFn: async () => {
       return await Promise.all(Array.from({ length: 1000 }, (_, i) => ApiClient.get(`/techa/${i}.json`)));
     },
+    staleTime: 5 * 60 * 1000,
   });
   return { ...query };
 };
