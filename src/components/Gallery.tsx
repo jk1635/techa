@@ -1,10 +1,11 @@
-import { ChangeEvent, useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
+import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
+import * as React from 'react';
 
 import styled from '@emotion/styled';
 import { useRecoilState } from 'recoil';
 
 import Dialog from '@components/Dialog.tsx';
+import LazyLoadImage from '@components/Image.tsx';
 import { filterState, searchState } from '@stores/atoms.ts';
 
 import { Techa } from '@/types';
@@ -24,21 +25,30 @@ const Gallery = ({ data }) => {
     setSearchId(formattedValue);
   };
 
-  const filterAttributes = (item: Techa) => {
-    return Object.entries(filters).every(([key, selectedValues]) => {
-      if (selectedValues.length === 0) {
-        return true;
-      } else {
-        const attribute = item.attributes.find(attr => attr.trait_type === key && selectedValues.includes(attr.value));
-        return !!attribute;
-      }
-    });
-  };
+  const filterAttributes = useCallback(
+    (item: Techa) => {
+      return Object.entries(filters).every(([key, selectedValues]) => {
+        if (selectedValues.length === 0) {
+          return true;
+        } else {
+          const attribute = item.attributes.find(
+            attr => attr.trait_type === key && selectedValues.includes(attr.value)
+          );
+          return !!attribute;
+        }
+      });
+    },
+    [filters]
+  );
 
-  const filteredData: Techa[] = data.filter(item => {
-    if (!item.name.includes(searchId)) return false;
-    return filterAttributes(item);
-  });
+  const filteredData: Techa[] = useMemo(
+    () =>
+      data.filter(item => {
+        if (!item.name.includes(searchId)) return false;
+        return filterAttributes(item);
+      }),
+    [data, searchId, filterAttributes]
+  );
 
   const handleImageClick = item => {
     setIsOpen(true);
@@ -63,9 +73,10 @@ const Gallery = ({ data }) => {
       <TopArea>
         <SearchWrapper>
           <Searchbar type="text" maxlength="4" placeholder="Number" value={searchId} onChange={handleInputChange} />
-          <SearchIcon src={Search} />
+          <SearchIcon src={Search} alt="search-icon" />
         </SearchWrapper>
       </TopArea>
+
       <CardList>
         {filteredData &&
           filteredData.map((item, index) => (
@@ -77,29 +88,6 @@ const Gallery = ({ data }) => {
     </GalleryContainer>
   );
 };
-
-const LazyLoadImage = ({ item, onClick }) => {
-  const { ref, inView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-
-  const [loaded, setLoaded] = useState(false);
-
-  return (
-    <Card ref={ref} onClick={onClick} inView={inView} loaded={loaded}>
-      {loaded && <Skeleton />}
-      {inView && <Image src={item.image} alt={item.name} onLoad={() => setLoaded(true)} />}
-      <CardTitle>{item.name}</CardTitle>
-    </Card>
-  );
-};
-
-const Skeleton = styled.div`
-  width: 100%;
-  background-color: rgba(142, 138, 152, 0.3);
-  border-radius: 0.75rem;
-`;
 
 const GalleryContainer = styled.section`
   margin-left: 3rem;
@@ -146,37 +134,6 @@ const CardList = styled.ul`
   width: 100%;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.25rem;
-`;
-
-const Card = styled.li`
-  overflow: hidden;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 100%;
-  border-radius: 0.75rem;
-  background-color: rgba(142, 138, 152, 0.15);
-  cursor: pointer;
-  opacity: ${({ inView }) => (inView ? 1 : 0)};
-  transition: opacity 1s ease-out;
-
-  :hover {
-    box-sizing: border-box;
-    transition: border 0.3s;
-    border: 3px solid rgb(190, 117, 255);
-  }
-`;
-
-const Image = styled.img`
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-`;
-
-const CardTitle = styled.span`
-  padding: 0.875rem 1.5rem;
-  ${theme.fonts.heading2Bold};
-  color: #ffffff;
 `;
 
 export default Gallery;
