@@ -58,7 +58,7 @@ src
 
 ```sh
 > yarn install
-> yarn start
+> yarn dev
 ```
 
 ## 3. 주요 기능 리스트
