@@ -13,7 +13,9 @@ type FilterKeys =
   | 'Earring'
   | 'Head';
 
-export type FilterState = Record<FilterKeys, string[]>;
+export type FilterState = {
+  [key: string]: string[];
+};
 
 export interface Techa {
   name: string;

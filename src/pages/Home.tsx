@@ -1,9 +1,9 @@
 import styled from '@emotion/styled';
-import useFetchData from '@hooks/useFetchData.ts';
+import useFetchData from '@hooks/useFetchData';
 
-import Gallery from '@components/Gallery.tsx';
-import Header from '@components/Header.tsx';
-import Sidebar from '@components/Sidebar.tsx';
+import Gallery from '@components/Gallery';
+import Header from '@components/Header';
+import Sidebar from '@components/Sidebar';
 
 const Home = () => {
   const { data, isLoading } = useFetchData();

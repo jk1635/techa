@@ -1,18 +1,21 @@
 import { ChangeEvent, useCallback, useEffect, useMemo, useState } from 'react';
-import * as React from 'react';
 
 import styled from '@emotion/styled';
 import { useAtom } from 'jotai';
 
-import Dialog from '@components/Dialog.tsx';
-import LazyLoadImage from '@components/Image.tsx';
-import { filterState, searchState } from '@stores/atoms.ts';
+import Dialog from '@components/Dialog';
+import LazyLoadImage from '@components/Image';
+import { filterState, searchState } from '@stores/atoms';
 
 import { Techa } from '@/types';
 import Search from '@assets/icons/search.svg';
 import theme from '@styles/theme';
 
-const Gallery = ({ data }) => {
+interface GalleryProps {
+  data: Techa[];
+}
+
+const Gallery = ({ data }: GalleryProps) => {
   const [searchId, setSearchId] = useAtom(searchState);
   const [filters] = useAtom(filterState);
 
@@ -50,7 +53,7 @@ const Gallery = ({ data }) => {
     [data, searchId, filterAttributes]
   );
 
-  const handleImageClick = item => {
+  const handleImageClick = (item: Techa) => {
     setIsOpen(true);
     setSelectedItem({ name: item.name, image: item.image });
   };
@@ -72,7 +75,7 @@ const Gallery = ({ data }) => {
     <GalleryContainer>
       <TopArea>
         <SearchWrapper>
-          <Searchbar type="text" maxlength="4" placeholder="Number" value={searchId} onChange={handleInputChange} />
+          <Searchbar type="text" placeholder="Number" value={searchId} onChange={handleInputChange} />
           <SearchIcon src={Search} alt="search-icon" />
         </SearchWrapper>
       </TopArea>

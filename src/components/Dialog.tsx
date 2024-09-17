@@ -3,7 +3,7 @@ import { MouseEvent } from 'react';
 import styled from '@emotion/styled';
 
 import Close from '@assets/icons/close.svg';
-import theme from '@styles/theme.ts';
+import theme from '@styles/theme';
 
 interface DialogProps {
   name?: string;

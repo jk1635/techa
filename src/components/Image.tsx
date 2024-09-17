@@ -4,9 +4,22 @@ import { useInView } from 'react-intersection-observer';
 
 import styled from '@emotion/styled';
 
-import theme from '@styles/theme.ts';
+import theme from '@styles/theme';
 
-const LazyLoadImage = React.memo(({ item, onClick }) => {
+interface ImageProps {
+  item: {
+    image: string;
+    name: string;
+  };
+  onClick: () => void;
+}
+
+interface CardProps {
+  inView: boolean;
+  loaded: boolean;
+}
+
+const LazyLoadImage = React.memo(({ item, onClick }: ImageProps) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
@@ -29,7 +42,7 @@ const Skeleton = styled.div`
   border-radius: 0.75rem;
 `;
 
-const Card = styled.li`
+const Card = styled.li<CardProps>`
   overflow: hidden;
   display: flex;
   justify-content: space-between;

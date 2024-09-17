@@ -3,7 +3,7 @@ import { Global, ThemeProvider } from '@emotion/react';
 import global from '@styles/global';
 import theme from '@styles/theme';
 
-import Home from '@pages/Home.tsx';
+import Home from '@pages/Home';
 
 function App() {
   return (

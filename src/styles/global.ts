@@ -43,7 +43,6 @@ const global = css`
 
   body {
     font-family: 'Montserrat', 'NotoSansKR', sans-serif;
-    overflow: hidden;
     font-size: 1rem;
     letter-spacing: -0.4px;
     line-height: 1;

@@ -1,7 +1,5 @@
 # Fingerlabs Assignment
 
-
-
 ## 1. 프로젝트 설명 및 구조
 
 <div>   
@@ -12,6 +10,8 @@
 
 - Techa Miya NFT(Non-Fungible Token) 이미지를 볼 수 있는 갤러리 형태의 페이지를 구현
 - 0번부터 999번까지 총 1000개의 이미지를 보여주며, attributes 기반 필터링 및 토큰 번호 검색 기능 제공
+
+[배포 링크](https://techa-six.vercel.app)
 
 <details>
 <summary><strong>프로젝트 구조 (더보기)</strong></summary>

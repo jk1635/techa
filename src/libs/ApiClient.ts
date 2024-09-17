@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse, isAxiosError } from 'axios';
 
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -6,18 +6,13 @@ const axiosInstance = axios.create({
   baseURL,
 });
 
-interface ApiResponse<T> {
-  message: string;
-  data: T;
-}
-
 const ApiClient = {
   async get<T>(url: string, params?: unknown): Promise<T> {
     try {
-      const response: axios.AxiosResponse<T> = await axiosInstance.get<ApiResponse<T>>(url, { params });
+      const response: AxiosResponse<T> = await axiosInstance.get(url, { params });
       return response.data;
     } catch (error) {
-      if (axios.isAxiosError(error)) {
+      if (isAxiosError(error)) {
         throw handleError(error);
       } else {
         throw new Error('알 수 없는 에러가 발생했습니다.');

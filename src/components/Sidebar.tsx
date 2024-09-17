@@ -7,10 +7,11 @@ import { useAtom } from 'jotai';
 import { filterState, initialFilterState, searchState } from '@stores/atoms';
 
 import Options from '@/data/techamiya_traits.json';
+import { FilterState } from '@/types';
 import ArrowDown from '@assets/icons/arrow-down.svg';
 import ArrowUp from '@assets/icons/arrow-up.svg';
 import Refresh from '@assets/icons/refresh.svg';
-import theme from '@styles/theme.ts';
+import theme from '@styles/theme';
 
 const Sidebar = () => {
   const [filters, setFilters] = useAtom(filterState);
@@ -20,14 +21,15 @@ const Sidebar = () => {
   const [animate, setAnimate] = useState<boolean>(false);
 
   const handleFilterChange = (traitType: string, value: string, e: ChangeEvent<HTMLInputElement>) => {
-    setFilters(prevFilters => {
+    setFilters((prevFilters: FilterState) => {
       const currentValues = prevFilters[traitType];
-      const updatedValues = e.target.checked ? [...currentValues, value] : currentValues.filter(v => v !== value);
+      const updatedValues = e.target.checked
+        ? [...currentValues, value]
+        : currentValues.filter((v: string) => v !== value);
 
       return { ...prevFilters, [traitType]: updatedValues };
     });
   };
-
   const toggleDropdown = (traitType: string) => {
     setIsOpen(prev => ({ ...prev, [traitType]: !prev[traitType] }));
   };
